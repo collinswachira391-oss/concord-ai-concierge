@@ -1,186 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-<meta name="theme-color" content="#0a1420"/>
-<title>Concorde · Nairobi</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07110f">
+<title>CONCORD — AI Hospitality Concierge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#c9a227;--gold2:#e8c547;--navy:#0a1420;--muted:#94a3b8;--text:#eef2f7;--success:#10b981}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;font-family:Outfit,system-ui,sans-serif;background:var(--navy);color:var(--text);overflow-x:hidden}
-.app{max-width:430px;margin:0 auto;min-height:100vh;position:relative;padding-bottom:78px}
-.topbar{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:rgba(10,20,32,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06)}
-.logo{font-family:Cormorant Garamond,serif;font-size:20px;font-weight:600}
-.logo span{color:var(--gold)}
-.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a1420;display:grid;place-items:center;font-weight:700;font-size:13px}
-.hero{padding:22px 18px 8px}
-.greeting{font-size:13px;color:var(--muted);margin-bottom:4px}
-.hero h1{font-family:Cormorant Garamond,serif;font-size:28px;font-weight:600;line-height:1.15;margin-bottom:6px}
-.hero h1 em{font-style:normal;color:var(--gold)}
-.search{margin:14px 18px;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
-.search input{flex:1;background:none;border:none;color:var(--text);font:inherit;font-size:14px;outline:none}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:8px 18px 18px}
-.tile{border-radius:16px;padding:16px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);cursor:pointer;min-height:92px}
-.tile .icon{font-size:22px;margin-bottom:8px}
-.tile h3{font-size:14px;font-weight:600;margin-bottom:2px}
-.tile p{font-size:11px;color:var(--muted)}
-.section{padding:6px 18px 20px}
-.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.section-head h2{font-family:Cormorant Garamond,serif;font-size:20px}
-.scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
-.room-card{min-width:220px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);flex-shrink:0}
-.room-card img{width:100%;height:130px;object-fit:cover;display:block}
-.room-card .body{padding:12px}
-.room-card h3{font-size:15px;margin-bottom:3px}
-.room-card p{font-size:11px;color:var(--muted);margin-bottom:8px}
-.price{font-size:13px;color:var(--gold);font-weight:600}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 16px;border-radius:12px;font:inherit;font-weight:600;font-size:13px;border:none;cursor:pointer;text-decoration:none}
-.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#0a1420}
-.btn-ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid rgba(255,255,255,.12)}
-.btn-block{width:100%}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;max-width:430px;margin:0 auto;display:flex;justify-content:space-around;padding:10px 8px 16px;background:rgba(10,20,32,.95);backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.06);z-index:100}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;color:var(--muted);cursor:pointer;padding:4px 10px}
-.nav-item.active{color:var(--gold)}
-.nav-item .ni{font-size:18px}
-.screen{display:none}
-.screen.active{display:block}
-.chat-box{height:calc(100vh - 160px);display:flex;flex-direction:column;padding:0 12px}
-.msgs{flex:1;overflow-y:auto;padding:12px 4px;display:flex;flex-direction:column;gap:10px}
-.msg{max-width:88%;padding:11px 13px;border-radius:14px;font-size:13px;line-height:1.45}
-.msg.bot{background:rgba(255,255,255,.07);align-self:flex-start}
-.msg.user{background:linear-gradient(135deg,rgba(232,197,71,.25),rgba(201,162,39,.18));align-self:flex-end;color:#fef3c7}
-.chat-bar{display:flex;gap:8px;padding:10px 4px 12px}
-.chat-bar input{flex:1;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.25);color:#fff;font:inherit;font-size:14px}
-.chat-bar input:focus{outline:none;border-color:var(--gold)}
-.chip-row{display:flex;gap:8px;overflow-x:auto;padding:8px 0;scrollbar-width:none}
-.chip{white-space:nowrap;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);font-size:12px;color:#cbd5e1;cursor:pointer}
-.form-card{margin:12px 18px;padding:16px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
-.form-card label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;text-transform:uppercase}
-.form-card input,.form-card select,.form-card textarea{width:100%;padding:11px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.25);color:#fff;font:inherit;font-size:14px;margin-bottom:12px}
-.list-item{display:flex;gap:12px;padding:12px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);margin-bottom:10px}
-.list-item img{width:72px;height:72px;border-radius:10px;object-fit:cover}
-.list-item h3{font-size:14px;margin-bottom:2px}
-.list-item p{font-size:12px;color:var(--muted)}
-.back{font-size:13px;color:var(--gold);cursor:pointer;margin:12px 18px 0;display:inline-block}
-.banner{margin:0 18px 14px;padding:14px;border-radius:14px;background:linear-gradient(135deg,rgba(201,162,39,.15),rgba(201,162,39,.05));border:1px solid rgba(201,162,39,.25)}
-.banner strong{display:block;font-size:13px;margin-bottom:2px}
-.banner span{font-size:12px;color:var(--muted)}
-.wa{position:fixed;bottom:90px;right:max(16px,calc(50% - 200px));width:52px;height:52px;border-radius:50%;background:#25D366;display:grid;place-items:center;font-size:24px;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:90;text-decoration:none}
+:root{--ink:#07110f;--paper:#f3f0e8;--cream:#faf8f2;--line:rgba(255,255,255,.13);--gold:#d7b66a;--green:#9eb7a6;--muted:#a7b2ad}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--ink);color:#fff;font-family:Manrope,system-ui,sans-serif}a{color:inherit;text-decoration:none}.shell{max-width:1440px;margin:auto;overflow:hidden}.nav{position:fixed;inset:0 0 auto;z-index:20;padding:22px 5vw;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(#07110fee,transparent);backdrop-filter:blur(8px)}.brand{font:600 25px "Playfair Display";letter-spacing:.16em}.brand small{font:500 9px "DM Mono";letter-spacing:.28em;color:var(--gold);display:block;margin-top:2px}.links{display:flex;gap:30px;font-size:12px;color:#dce2de}.links a{opacity:.78}.links a:hover{opacity:1;color:var(--gold)}.nav-cta{border:1px solid var(--line);padding:11px 17px;border-radius:99px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}.hero{min-height:100vh;position:relative;display:grid;place-items:center;padding:130px 6vw 80px;background:radial-gradient(circle at 75% 35%,#24443c 0,transparent 28%),radial-gradient(circle at 20% 70%,#132b25 0,transparent 32%),var(--ink)}.orb{position:absolute;width:44vw;height:44vw;max-width:620px;max-height:620px;border-radius:50%;right:7%;top:18%;background:radial-gradient(circle at 35% 30%,#d7b66a 0 2%,#48675c 13%,#1a342e 38%,#07110f 68%);filter:drop-shadow(0 35px 80px #0009);animation:float 8s ease-in-out infinite}.orb:after{content:"";position:absolute;inset:9%;border:1px solid #ffffff26;border-radius:50%;box-shadow:inset 0 0 70px #fff1}.hero-copy{position:relative;z-index:2;max-width:820px;margin-right:auto}.eyebrow{font:500 10px "DM Mono";letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:25px}.hero h1{font:500 clamp(58px,8vw,126px);line-height:.88;letter-spacing:-.055em;margin:0;max-width:900px}.hero h1 em{font-family:"Playfair Display";font-weight:500;color:#cbd6cf}.hero p{max-width:520px;color:#b8c3bd;line-height:1.8;font-size:15px;margin:34px 0}.actions{display:flex;gap:12px;flex-wrap:wrap}.btn{padding:15px 21px;border-radius:99px;font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:800}.primary{background:var(--gold);color:var(--ink)}.secondary{border:1px solid var(--line);background:#ffffff08}.ticker{position:absolute;bottom:27px;left:6vw;right:6vw;display:flex;justify-content:space-between;color:#718079;font:10px "DM Mono";letter-spacing:.12em;text-transform:uppercase}.section{padding:120px 6vw}.light{background:var(--paper);color:var(--ink)}.intro{display:grid;grid-template-columns:1fr 1.5fr;gap:8vw;align-items:end}.kicker{font:500 10px "DM Mono";letter-spacing:.25em;text-transform:uppercase;color:#7e8c85}.light .kicker{color:#8e6f2c}.intro h2{font:500 clamp(38px,5vw,70px);line-height:.98;letter-spacing:-.045em;margin:18px 0}.intro p{font-size:17px;line-height:1.8;color:#5f6964;max-width:610px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:70px}.card{min-height:390px;border:1px solid #c9c5bb;border-radius:26px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:.5s}.card:hover{transform:translateY(-8px);background:#e9e5da}.num{font:10px "DM Mono";color:#8e6f2c}.icon{font-size:42px}.card h3{font:500 30px "Playfair Display";margin:0 0 10px}.card p{color:#66716b;line-height:1.7;font-size:13px}.dark{background:#0a1512}.experience{display:grid;grid-template-columns:1fr 1fr;gap:7vw;align-items:center}.phone{aspect-ratio:4/5;max-width:470px;border:1px solid #ffffff19;border-radius:38px;background:linear-gradient(145deg,#1d3931,#08100e 55%);padding:16px;box-shadow:0 40px 100px #0008;transform:rotate(-4deg)}.phone-inner{height:100%;border-radius:27px;border:1px solid #ffffff12;padding:28px;background:radial-gradient(circle at 75% 15%,#d7b66a18,transparent 25%),#07110f;display:flex;flex-direction:column}.mini-top{display:flex;justify-content:space-between;font-size:10px;color:#899891}.mini-title{font:500 44px "Playfair Display";margin-top:auto}.chat{margin-top:25px;border:1px solid #ffffff12;background:#ffffff08;border-radius:18px;padding:15px;font-size:12px;color:#c6d0cb;line-height:1.6}.chat b{color:var(--gold)}.experience h2{font:500 clamp(40px,5vw,72px);line-height:.98;margin:20px 0}.experience p{color:#9ca9a3;line-height:1.8;max-width:560px}.metrics{display:flex;gap:50px;margin-top:45px}.metric strong{font:500 34px "Playfair Display";display:block;color:var(--gold)}.metric span{font:9px "DM Mono";letter-spacing:.15em;color:#75847c}.demo{background:var(--cream);color:var(--ink);padding:100px 6vw}.demo-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:35px}.demo-head h2{font:500 clamp(38px,5vw,65px);margin:10px 0 0;line-height:1}.console{border:1px solid #d7d2c7;border-radius:28px;padding:18px;background:#fff;box-shadow:0 25px 70px #09110e14;display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.window{background:#08120f;border-radius:20px;padding:26px;min-height:390px}.window-top{display:flex;gap:7px;margin-bottom:35px}.dot{width:7px;height:7px;border-radius:50%;background:#56645e}.status{margin-left:auto;font:9px "DM Mono";color:#9eb7a6}.window h3{font:500 38px "Playfair Display";margin:0 0 8px}.window p{color:#98a59f;line-height:1.7;font-size:13px}.prompt{margin-top:35px;border:1px solid #ffffff15;border-radius:14px;padding:14px;color:#9ea9a4;font-size:12px}.quick{display:grid;gap:10px}.quick button{border:1px solid #ddd8ce;background:#faf9f5;border-radius:17px;padding:19px;text-align:left;font:600 13px Manrope;cursor:pointer}.quick button:hover{border-color:#c3a65e;background:#f4efe2}.result{margin-top:12px;padding:18px;border-radius:17px;background:#0c1a16;color:#cdd7d1;line-height:1.6;font-size:12px;min-height:100px}.footer{padding:65px 6vw;display:flex;justify-content:space-between;gap:30px;border-top:1px solid #ffffff12;color:#87948e;font-size:11px}.footer .brand{color:#fff}@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-18px) rotate(3deg)}}@media(max-width:800px){.links{display:none}.hero{padding-top:150px;align-items:start}.orb{width:85vw;height:85vw;right:-20%;top:38%;opacity:.7}.hero-copy{max-width:100%}.hero h1{font-size:64px}.ticker{display:none}.intro,.experience,.console{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.phone{margin:auto;width:80%}.section{padding:85px 7vw}.metrics{gap:25px}.metric strong{font-size:27px}.demo-head{display:block}.nav{padding:18px 6vw}.nav-cta{display:none}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.orb{animation:none}.card{transition:none}}
 </style>
 </head>
 <body>
-<div class="app">
-<div id="home" class="screen active">
-<div class="topbar"><div class="logo">Concorde <span>Nairobi</span></div><div class="avatar">G</div></div>
-<div class="hero"><div class="greeting" id="greeting">Welcome to Concorde</div><h1>Your stay,<br><em>elevated</em></h1></div>
-<div class="search" onclick="show('concierge')"><span>✦</span><input placeholder="Ask Concorde anything…" readonly></div>
-<div class="banner"><strong>Direct booking benefit</strong><span>Best rate guarantee · Flexible cancellation · Instant confirmation</span></div>
-<div class="grid">
-<div class="tile" onclick="show('rooms')"><div class="icon">🛏</div><h3>Book a Room</h3><p>Direct rates</p></div>
-<div class="tile" onclick="show('rooms')"><div class="icon">🔍</div><h3>Explore Rooms</h3><p>86 rooms & suites</p></div>
-<div class="tile" onclick="show('dining')"><div class="icon">🍽</div><h3>Dining</h3><p>3 restaurants</p></div>
-<div class="tile" onclick="show('concierge')"><div class="icon">✦</div><h3>AI Concierge</h3><p>Ask anything</p></div>
-<div class="tile" onclick="show('plan')"><div class="icon">🗺</div><h3>Plan My Stay</h3><p>Personal itinerary</p></div>
-<div class="tile" onclick="show('events')"><div class="icon">📅</div><h3>Events</h3><p>Meetings & weddings</p></div>
-<div class="tile" onclick="alert('Loyalty — configure in admin')"><div class="icon">★</div><h3>Loyalty</h3><p>Rewards</p></div>
-<div class="tile" onclick="window.open('https://wa.me/254711111333?text=Hello%20Concorde','_blank')"><div class="icon">💬</div><h3>WhatsApp</h3><p>Talk to us</p></div>
-</div>
-<div class="section"><div class="section-head"><h2>Featured rooms</h2></div>
-<div class="scroll">
-<div class="room-card" onclick="show('rooms')"><img src="https://www.theconcordhotels.com/wp-content/uploads/2020/01/Superior-room-desk-300x237.jpg" alt="Superior"><div class="body"><h3>Superior Room</h3><p>Business-ready</p><div class="price">View details</div></div></div>
-<div class="room-card" onclick="show('rooms')"><img src="https://www.theconcordhotels.com/wp-content/uploads/2020/04/Exec-_-Deluxe-Suite-Sitting-Room-300x237.jpg" alt="Executive"><div class="body"><h3>Executive Suite</h3><p>Living area · Views</p><div class="price">View details</div></div></div>
-<div class="room-card" onclick="show('rooms')"><img src="https://www.theconcordhotels.com/wp-content/uploads/2019/06/Penthouse-Entrance-300x300.jpg" alt="Penthouse"><div class="body"><h3>Penthouse</h3><p>Ultimate luxury</p><div class="price">View details</div></div></div>
-</div></div>
-</div>
-
-<div id="rooms" class="screen">
-<div class="topbar"><div class="logo">Rooms</div><span class="back" onclick="show('home')">← Home</span></div>
-<div class="section" style="padding-top:14px">
-<div class="list-item"><img src="https://www.theconcordhotels.com/wp-content/uploads/2020/01/Superior-room-desk-300x237.jpg" alt=""><div><h3>Superior Room</h3><p>Work desk · Free Wi-Fi · 24hr service</p><button class="btn btn-gold" style="margin-top:8px;padding:8px 12px;font-size:12px" onclick="startBook('Superior Room')">Select</button></div></div>
-<div class="list-item"><img src="https://www.theconcordhotels.com/wp-content/uploads/2020/04/Exec-_-Deluxe-Suite-Sitting-Room-300x237.jpg" alt=""><div><h3>Executive Suite</h3><p>Living area · City views</p><button class="btn btn-gold" style="margin-top:8px;padding:8px 12px;font-size:12px" onclick="startBook('Executive Suite')">Select</button></div></div>
-<div class="list-item"><img src="https://www.theconcordhotels.com/wp-content/uploads/2019/06/Penthouse-Entrance-300x300.jpg" alt=""><div><h3>Deluxe & Penthouse</h3><p>Panoramic views</p><button class="btn btn-gold" style="margin-top:8px;padding:8px 12px;font-size:12px" onclick="startBook('Penthouse')">Select</button></div></div>
-<div class="form-card" id="bookBox" style="display:none"><h3 style="margin-bottom:12px">Book <span id="bookRoom"></span></h3>
-<label>Check-in</label><input type="date" id="ci"><label>Check-out</label><input type="date" id="co">
-<label>Guests</label><select id="guests"><option>1 Adult</option><option selected>2 Adults</option></select>
-<button class="btn btn-gold btn-block" onclick="submitBook()">Request booking</button>
-<p style="font-size:11px;color:var(--muted);margin-top:10px">Demo mode — live rates need PMS connection.</p></div>
-</div></div>
-
-<div id="concierge" class="screen">
-<div class="topbar"><div class="logo">Ask Concorde</div><span class="back" onclick="show('home')">← Home</span></div>
-<div class="chat-box">
-<div class="chip-row">
-<button class="chip" onclick="ask('What rooms do you have?')">Rooms</button>
-<button class="chip" onclick="ask('Recommend a romantic dinner')">Dining</button>
-<button class="chip" onclick="ask('Airport transfer?')">Transfer</button>
-<button class="chip" onclick="ask('Spa and pool hours')">Spa & Pool</button>
-</div>
-<div class="msgs" id="msgs"><div class="msg bot">Welcome. I’m Concorde’s AI concierge. How can I help with your stay?</div></div>
-<div class="chat-bar"><input id="cin" placeholder="Type naturally…" onkeydown="if(event.key==='Enter')send()"><button class="btn btn-gold" onclick="send()">Send</button></div>
-<a href="https://wa.me/254711111333?text=Hello%20Concorde%2C%20I%20need%20help" target="_blank" class="btn btn-ghost btn-block" style="margin:0 4px 8px">Continue on WhatsApp →</a>
-</div></div>
-
-<div id="plan" class="screen">
-<div class="topbar"><div class="logo">Plan My Stay</div><span class="back" onclick="show('home')">← Home</span></div>
-<div class="form-card">
-<label>Describe your trip</label>
-<textarea id="trip" rows="3">3 nights with my partner. We love food and want to relax.</textarea>
-<label>Nights</label><select id="nights"><option>2</option><option selected>3</option><option>4</option></select>
-<button class="btn btn-gold btn-block" onclick="makePlan()">Create itinerary</button>
-</div>
-<div id="planOut" class="section" style="display:none"></div>
-</div>
-
-<div id="dining" class="screen">
-<div class="topbar"><div class="logo">Dining</div><span class="back" onclick="show('home')">← Home</span></div>
-<div class="section" style="padding-top:14px">
-<div class="list-item"><div style="width:72px;height:72px;border-radius:10px;background:rgba(201,162,39,.15);display:grid;place-items:center;font-size:28px">🍽</div><div><h3>Bonhomie Restaurant</h3><p>Continental · 06:00 – Midnight</p></div></div>
-<div class="list-item"><div style="width:72px;height:72px;border-radius:10px;background:rgba(201,162,39,.15);display:grid;place-items:center;font-size:28px">🍜</div><div><h3>Umami Oriental</h3><p>Chinese · Japanese · Thai · Korean</p></div></div>
-<div class="list-item"><div style="width:72px;height:72px;border-radius:10px;background:rgba(201,162,39,.15);display:grid;place-items:center;font-size:28px">🍛</div><div><h3>Curry Flavors</h3><p>North & South Indian</p></div></div>
-</div></div>
-
-<div id="events" class="screen">
-<div class="topbar"><div class="logo">Events & Corporate</div><span class="back" onclick="show('home')">← Home</span></div>
-<div class="form-card">
-<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Enquiry for meetings, weddings or group stays.</p>
-<label>Full name</label><input id="eName" placeholder="Your name">
-<label>Email</label><input id="eEmail" type="email" placeholder="you@company.com">
-<label>Phone</label><input id="ePhone" placeholder="+254…">
-<label>Event type</label><select id="eType"><option>Conference / Meeting</option><option>Wedding</option><option>Corporate group</option><option>Private event</option></select>
-<label>Approx. guests</label><input id="ePax" placeholder="e.g. 40">
-<button class="btn btn-gold btn-block" onclick="document.getElementById('leadOk').style.display='block'">Submit enquiry</button>
-<p id="leadOk" style="display:none;color:var(--success);font-size:13px;margin-top:10px">✓ Enquiry captured (demo).</p>
-</div></div>
-
-<div id="mystay" class="screen">
-<div class="topbar"><div class="logo">My Stay</div><span class="back" onclick="show('home')">← Home</span></div>
-<div class="section" style="padding-top:20px">
-<div class="banner"><strong>No active stay</strong><span>After booking this becomes your digital assistant: Wi-Fi, room service, requests.</span></div>
-<button class="btn btn-gold btn-block" onclick="show('rooms')">Book a room</button>
-</div></div>
-
-<a class="wa" href="https://wa.me/254711111333?text=Hello%20Concorde" target="_blank">💬</a>
-<nav class="bottom-nav">
-<div class="nav-item active" onclick="show('home')"><span class="ni">⌂</span>Home</div>
-<div class="nav-item" onclick="show('rooms')"><span class="ni">🛏</span>Rooms</div>
-<div class="nav-item" onclick="show('concierge')"><span class="ni">✦</span>AI</div>
-<div class="nav-item" onclick="show('mystay')"><span class="ni">◎</span>My Stay</div>
-<div class="nav-item" onclick="show('events')"><span class="ni">📅</span>Events</div>
-</nav>
+<div class="shell">
+<nav class="nav"><a class="brand" href="#">CONCORD<small>AI HOSPITALITY CONCIERGE</small></a><div class="links"><a href="#experience">Experience</a><a href="#concierge">Concierge</a><a href="#demo">Demo</a></div><a class="nav-cta" href="#demo">Experience it</a></nav>
+<section class="hero">
+<div class="orb"></div><div class="hero-copy"><div class="eyebrow">A new digital front desk · Nairobi</div><h1>Hospitality,<br><em>reimagined.</em></h1><p>One intelligent concierge for discovery, enquiries, stays and service — designed to make every digital interaction feel as considered as the guest experience itself.</p><div class="actions"><a class="btn primary" href="#demo">Ask Concord AI ↗</a><a class="btn secondary" href="#experience">Explore the experience</a></div></div>
+<div class="ticker"><span>CONCORD · NAIROBI</span><span>Digital concierge concept / 01</span><span>Available 24 / 7</span></div>
+</section>
+<section class="section light" id="experience"><div class="intro"><div><div class="kicker">01 / The experience</div><h2>From first question to final stay.</h2></div><p>Concord becomes more than a website. It becomes a digital host: guiding guests to the right room, helping plan a stay, answering service questions and turning intent into a clear next step.</p></div>
+<div class="cards"><article class="card"><div class="num">01 — DISCOVER</div><div class="icon">◌</div><div><h3>Find your stay</h3><p>Room discovery, dining, amenities and experiences arranged around what the guest actually wants.</p></div></article><article class="card"><div class="num">02 — ASSIST</div><div class="icon">✦</div><div><h3>Ask anything</h3><p>A conversational concierge gives fast answers while keeping the path to human assistance one tap away.</p></div></article><article class="card"><div class="num">03 — CONVERT</div><div class="icon">↗</div><div><h3>Take action</h3><p>Booking, event enquiries, WhatsApp handoff and stay planning are designed as one seamless journey.</p></div></article></div></section>
+<section class="section dark" id="concierge"><div class="experience"><div class="phone"><div class="phone-inner"><div class="mini-top"><span>CONCORD</span><span>● LIVE</span></div><div class="mini-title">How may<br>I help?</div><div class="chat"><b>CONCORD AI</b><br>Welcome. Tell me what kind of stay you are planning and I’ll help you shape the experience.</div><div class="chat">“A relaxing weekend with great food.”</div></div></div><div><div class="kicker">02 / The digital host</div><h2>Human warmth.<br>Machine speed.</h2><p>Built around the questions guests already ask, the concierge turns static hotel information into a guided conversation — while preserving a premium, calm visual language.</p><div class="metrics"><div class="metric"><strong>24/7</strong><span>ASSISTANCE</span></div><div class="metric"><strong>01</strong><span>CONVERSATION</span></div><div class="metric"><strong>∞</strong><span>POSSIBILITIES</span></div></div></div></div></section>
+<section class="demo" id="demo"><div class="demo-head"><div><div class="kicker">03 / Live concept</div><h2>Ask Concord.</h2></div><div class="kicker">Interactive prototype</div></div><div class="console"><div class="window"><div class="window-top"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="status">● CONCORD AI ONLINE</span></div><h3>Your stay starts here.</h3><p id="answer">Choose a prompt and the concierge will respond instantly.</p><div class="prompt" id="prompt">“What would you like to know?”</div></div><div class="quick"><button onclick="answer('room')">◈ Help me choose a room</button><button onclick="answer('dining')">◈ Recommend dining</button><button onclick="answer('event')">◈ Plan an event</button><button onclick="answer('stay')">◈ Build my stay</button><div class="result" id="result">AI concierge responses appear here — ready for the next conversation.</div></div></div></section>
+<footer class="footer"><div><div class="brand">CONCORD</div><div style="margin-top:9px">A premium AI concierge concept for hospitality.</div></div><div>© 2026 · Concord digital experience</div></footer>
 </div>
 <script>
-const h={rooms:"We have 86 rooms: Superior, Executive Suites, Deluxe and Penthouse. Free Wi-Fi, mini-bar, 24hr room service.",dining:"Bonhomie (Continental 06:00–Midnight), Umami Oriental, Curry Flavors. 24hr room service.",spa:"ENSO Spa, steam, sauna, indoor heated pool 08:00–20:00.",meet:"Harmony Ballroom up to 200. Accord & Amity boardrooms.",check:"Check-in from 14:00. Check-out by 11:00.",transfer:"Yes — airport transfers can be arranged.",pool:"Indoor heated pool open 08:00–20:00."};
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));const map={home:0,rooms:1,concierge:2,mystay:3,events:4};if(map[id]!==undefined)document.querySelectorAll('.nav-item')[map[id]].classList.add('active');window.scrollTo(0,0)}
-function startBook(name){document.getElementById('bookRoom').textContent=name;document.getElementById('bookBox').style.display='block';document.getElementById('bookBox').scrollIntoView({behavior:'smooth'})}
-function submitBook(){alert('Booking request captured for '+document.getElementById('bookRoom').textContent+' (demo mode).')}
-function add(t,w){const d=document.createElement('div');d.className='msg '+w;d.textContent=t;document.getElementById('msgs').appendChild(d);document.getElementById('msgs').scrollTop=9999}
-function reply(q){const l=q.toLowerCase();if(/room|suite/.test(l))return h.rooms;if(/dinner|restaurant|food|dining|umami|bonhomie/.test(l))return h.dining;if(/spa|massage/.test(l))return h.spa;if(/meeting|conference|event|harmony|wedding/.test(l))return h.meet;if(/check-in|checkout/.test(l))return h.check;if(/airport|transfer/.test(l))return h.transfer;if(/pool|gym/.test(l))return h.pool;return "I can help with rooms, dining, spa, meetings, check-in and transfers. What would you like to know?"}
-function send(){const i=document.getElementById('cin');const q=i.value.trim();if(!q)return;add(q,'user');i.value='';setTimeout(()=>add(reply(q),'bot'),500)}
-function ask(t){document.getElementById('cin').value=t;send()}
-function makePlan(){const n=+document.getElementById('nights').value;let html='<div class="form-card"><h3 style="margin-bottom:10px">Your Concorde experience</h3><p style="font-size:13px;margin-bottom:8px"><strong>Day 1</strong> — Arrival · Check-in · Dinner at Bonhomie</p>';if(n>=2)html+='<p style="font-size:13px;margin-bottom:8px"><strong>Day 2</strong> — Breakfast · Pool · Umami</p>';if(n>=3)html+='<p style="font-size:13px;margin-bottom:8px"><strong>Day 3</strong> — Breakfast · Spa · Farewell dinner</p>';html+='<button class="btn btn-gold btn-block" style="margin-top:12px" onclick="show(\'rooms\')">Book this stay</button></div>';const o=document.getElementById('planOut');o.innerHTML=html;o.style.display='block'}
-const hr=new Date().getHours();document.getElementById('greeting').textContent=hr<12?'Good morning · Welcome to Concorde':hr<17?'Good afternoon · Welcome to Concorde':'Good evening · Welcome to Concorde';
+const data={room:["I can help narrow the stay down by purpose, room type and preferences. Tell me whether you’re travelling for business, a weekend escape or something special.","Find the room that fits the moment →"],dining:["Tell me what you’re craving — a relaxed meal, something celebratory or a particular cuisine — and I’ll guide you to the right dining experience.","Explore dining →"],event:["For meetings, weddings and private occasions, start with your date, guest count and event type. I’ll turn that into a clear enquiry.","Start an event enquiry →"],stay:["Give me your nights, who you’re travelling with and what you enjoy. I’ll shape a simple itinerary around your stay.","Plan my stay →"]};
+function answer(k){const d=data[k];document.getElementById('prompt').textContent='“'+d[0]+'”';document.getElementById('answer').textContent='Concord AI';document.getElementById('result').textContent=d[1];}
 </script>
 </body>
 </html>
